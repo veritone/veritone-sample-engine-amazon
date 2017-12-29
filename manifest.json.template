@@ -1,0 +1,21 @@
+{
+  "engineId": "ENGINE_ID",
+  "category": "faceRecognition",
+  "preferredInputFormat": "video/mp4",
+  "supportedInputFormats":
+  [
+    "video/mp4",
+    "video/mpeg"
+  ],
+  "outputFormats":
+  [
+    "application/json"
+  ],
+  "clusterSize": "large",
+  "vCPU": 1.0,
+  "concurrency": 50,
+  "maxFileMb": 1200.0,
+  "minMediaLengthMs": 15000,
+  "maxMediaLengthMs":  300000,
+  "releaseNotes": "Initial release"
+}

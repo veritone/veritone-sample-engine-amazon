@@ -1,0 +1,20 @@
+{
+        "graphql": {
+               "baseUri":"https://api.aws-prod.veritone.com/v3/graphql"
+           },
+	"veritone-api": {
+		"token": "TOKEN_PLACEHOLDER",
+		"baseUri": "https://api.aws-prod.veritone.com",
+		"maxRetry": 3,
+		"retryIntervalMs": 5000
+	},
+	"aws": {
+		"apiVersion": "2016-06-27",
+		"accessKeyId": "AWS_ACCESS_KEY_ID_PLACEHOLDER",
+		"secretAccessKey": "AWS_ACCESS_KEY_SECRET_KEY_PLACEHOLDER",
+		"region": "us-west-2"
+	},
+	"framesPerSecond": 1,
+	"clumpThreshold": 5,
+	"minConfidence": 50
+}
