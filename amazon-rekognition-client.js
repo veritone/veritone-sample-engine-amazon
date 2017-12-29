@@ -20,9 +20,6 @@ AmazonRekognitionClient.prototype.createCollection = function createCollection(c
         if (err) {
             return callback(err);
         }
-        // TODO should we morph this into something?
-        // StatusCode  integer & CollectionArn string
-        // just collectionId for now until we know what StatusCode mean..
         utils.logObject("[createCollection] - response = ", data);
         return callback(null, data);
     })
@@ -33,8 +30,6 @@ AmazonRekognitionClient.prototype.deleteCollection = function deleteCollection(c
         if (err) {
             return callback(err);
         }
-        // TODO should we morph this into something?
-        // StatusCode  integer & CollectionArn string
         return callback(null, data);
     })
 }

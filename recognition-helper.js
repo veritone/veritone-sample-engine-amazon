@@ -22,7 +22,6 @@ function cleanupData(dataPath) {
     if (dataPath.indexOf('http') !== 0) {
         fs.unlink(dataPath, (err) => {
             if (err) {
-                // just log error since files that are not local cannot be deleted
                 console.log(err);
             }
         });
@@ -99,8 +98,6 @@ RecognitionHelper.prototype.processImages = function processImages(frames, amazo
         console.log('PERF loadImage '+(Date.now() - start));
       }
 
-      // fire-and-forget async function call.
-      // we can clean up the temp file any time after it was read.
       if (!payload.debug) cleanupData(frame.image);
       if (payload.debug) console.log('loaded frame '+frame.start+' from '+frame.image);
       if (err) {
@@ -110,8 +107,6 @@ RecognitionHelper.prototype.processImages = function processImages(frames, amazo
       }
 
       // submit to amazon face detection API.
-      // TODO factor so that we have the option to use a different
-      // face detection method.
       self.detectFaces(amazonRekognitionClient, payload, allMatches, frame, image, imageBuffer, nextCallback);
     }); //load images
   }, function allDone(err, results) {
