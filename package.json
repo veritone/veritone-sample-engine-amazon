@@ -1,9 +1,9 @@
 {
-  "name": "task-amazon-rekognition-face-detection",
+  "name": "veritone-sample-engine-amazon",
   "version": "1.0.0",
-  "description": "",
+  "description": "Sample engine for the Veritone platform using Amazon Rekognition",
   "main": "scripts/app.js",
-  "homepage": "https://github.com/veritone/task-amazon-rekognition-face-detection",
+  "homepage": "https://github.com/veritone/veritone-sample-engine-amazon",
   "dependencies": {
     "apollo-client": "^1.9.2",
     "apollo-client-preset": "0.1.0-1",
