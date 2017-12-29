@@ -1,10 +1,10 @@
 {
         "graphql": {
-               "baseUri":"https://api.aws-prod.veritone.com/v3/graphql"
+               "baseUri":"https://api.veritone.com/v3/graphql"
            },
 	"veritone-api": {
 		"token": "TOKEN_PLACEHOLDER",
-		"baseUri": "https://api.aws-prod.veritone.com",
+		"baseUri": "https://api.veritone.com",
 		"maxRetry": 3,
 		"retryIntervalMs": 5000
 	},
