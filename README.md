@@ -55,15 +55,19 @@ The main function of this engine is to dectect faces on decomposed images from m
 Detection is triggered when the engine and the corresponding video are selected by the user in CMS
 
 A typical json payload:
-    ```
-    {
-      "jobId": "4079a128-5d4f-4ad8-a689-c7874763c004",
-      "token": "xxx.xxxx.xxx",
-      "taskId": "4079a128-5d4f-4ad8-a689-c7874763c004-d7343b72-a995-4376-9916-4879609e5d24",
-      "recordingId": "xxxxx"
-      "applicationId": "99f2e687-d22a-4bed-946e-75c683471359"
-    }
-    ```
+	'''
+      {
+        "jobId": "4079a128-5d4f-4ad8-a689-c7874763c004",
+        "token": "xxx.xxxx.xxx",
+        "taskId": "4079a128-5d4f-4ad8-a689-c7874763c004-d7343b72-a995-4376-9916-4879609e5d24",
+        "recordingId": "xxxxx"
+        "applicationId": "99f2e687-d22a-4bed-946e-75c683471359"
+      }
+    '''  
+
+Every container uploaded to Veritone for an engine should include a manifest.json file, which contains important information about the engine and build. 
+The manifest.json could be auto generated when going through the engine creation process via Veritone Developer. 
+This file needs to be copied to /var/manifest.json when building the Docker image. For more information about the fields in the manifest.json, visit [here](https://veritone-developer.atlassian.net/wiki/spaces/DOC/pages/18874416/Engine+Manifests).
 
 Typical development tasks for working with the engine:
  1.  Create a payload.json for running -- This is can be done via Veritone Developer under the TASKS tab after the engine has been uploaded and deployed
@@ -117,6 +121,9 @@ You can then :
 1.  create a payload.json file
 2.  export PAYLOAD_FILE=payload.json file
 3.  Run `/app/app.sh`
+
+The engine follows the engine construction guidelines outlined [here](https://veritone-developer.atlassian.net/wiki/spaces/DOC/pages/17989697/Engine+Construction+Guidelines). This is a good place for information on how to properly implement the Veritone engine workflow.  
+
 
 ### Deploying engine via Veritone Developer
 
