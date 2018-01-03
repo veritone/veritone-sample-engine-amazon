@@ -54,8 +54,8 @@ The main function of this engine is to dectect faces on decomposed images from m
 
 Detection is triggered when the engine and the corresponding video are selected by the user in CMS
 
-A typical running payload:
-    ```json
+A typical json payload:
+    ```
     {
       "jobId": "4079a128-5d4f-4ad8-a689-c7874763c004",
       "token": "xxx.xxxx.xxx",
