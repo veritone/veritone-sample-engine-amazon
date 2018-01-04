@@ -7,9 +7,9 @@
 - [Building Engine](#building-engine)
 
 ## Summary
-This is a demostration Veritone engine using the Amazon Rekognition API. 
+This is a demonstration Veritone engine using the Amazon Rekognition API. 
 
-It is meant to be an example of how to creat an external processing engine deployed via Veritone Developer.
+It is meant to be an example of how to create an external processing engine deployed via Veritone Developer.
 
 The full sample code can be found on [Github](https://github.com/veritone/veritone-sample-engine-amazon).
 
@@ -49,7 +49,7 @@ For more information on how to create an engine via Veritone Developer, visit [h
 
 
 ## Getting Started
-The main function of this engine is to dectect faces on images decomposed from mpeg videos. The output of this engine is a series of detected faces and the attributes associated with it, such as age, gender, facial landmarks and sentiment. 
+The main function of this engine is to detect faces on images decomposed from mpeg videos. The output of this engine is a series of detected faces and the attributes associated with it, such as age, gender, facial landmarks and sentiment. 
 
 Detection is triggered when the engine and the corresponding video are selected by the user in CMS. This action creates a job and a task.
 A typical task payload:
