@@ -122,7 +122,8 @@ It is important to understand how and when to call Update Task via the Veritone 
 
 There are two types of outputs from the engine. It is currently recommended engines output both.
 1. Engine output is uploaded to Veritone as an asset by calling the Create Asset mutation. 
-2. Task output is created by calling Update Task with the result. Below is an expample:
+2. Task output is created by calling Update Task with the result. 
+Below is an example of how to update both:
 ```javascript
 createAsset(results, function completeTaskNow(err, data) {
     if (err) {
@@ -143,5 +144,8 @@ $ docker tag az-rekognition-face-detection docker.veritone.com/{your-account}/az
 $ docker push docker.veritone.com/{your-account}/az-rekognition-face-detection:{custom-tag}
 ```
 
-Once the engine is uploaded it should appear in the the builds table. Press deploy to deploy the engine. Now the engine should be ready and click on the Tasks tab to create a task payload.
+Once the engine is uploaded it should appear in the the builds table. Press deploy to deploy the engine. Now the engine should be deployed and ready. 
+
+Click on the Tasks tab and create a test task. Run this locally to see if everything is running correctly. The task log should also popluate once the task is finished. Verify this log to make sure the engine is outputing correctly.
+
 The engine should also be accessible in CMS. Create a task by uploading a video and selecting az-rekognition-face-detection engine.
