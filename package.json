@@ -22,7 +22,7 @@
     "command-line-args": "^4.0.7",
     "command-line-usage": "^4.0.1",
     "download-file": "^0.1.5",
-    "ffmpeg": "git+https://github.com/veritone/node-ffmpeg.git#extract_frames",
+    "ffmpeg": "^0.0.4",
     "graphql-tag": "^2.4.2",
     "jimp": "^0.2.28",
     "mime-types": "^2.1.17",
