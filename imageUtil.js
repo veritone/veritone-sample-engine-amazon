@@ -18,7 +18,6 @@ function loadImage(imageUrl, callback) {
     });
 }
 
-
 module.exports = {
     crop,
     loadImage

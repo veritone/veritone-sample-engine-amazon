@@ -13,7 +13,6 @@ function AmazonRekognitionClient(config) {
     console.log('new client with ' + this._minConfidence);
 }
 
-
 AmazonRekognitionClient.prototype.createCollection = function createCollection(collectionId, callback) {
     var self = this;
     this._client.createCollection({ CollectionId: collectionId }, function createCollectionCallback(err, data) {
@@ -24,6 +23,7 @@ AmazonRekognitionClient.prototype.createCollection = function createCollection(c
         return callback(null, data);
     })
 }
+
 AmazonRekognitionClient.prototype.deleteCollection = function deleteCollection(collectionId, callback) {
     var self = this;
     this._client.deleteCollection({ CollectionId: collectionId }, function createCollectionCallback(err, data) {
@@ -118,7 +118,6 @@ AmazonRekognitionClient.prototype.indexFaces = function indexFaces(options, call
         })
     });
 }
-
 
 /**
  * callback function(err, face)
