@@ -30,7 +30,6 @@
     "string-to-stream": "^1.1.0",
     "superagent": "^3.6.0",
     "valid-url": "^1.0.9",
-    "veritone-api": "git+https://github.com/veritone/veritone-api.git#develop",
     "winston": "^2.3.1",
     "yargs": "^9.0.1",
     "moment": "^2.10.6"
