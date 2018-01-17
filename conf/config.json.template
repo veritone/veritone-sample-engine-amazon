@@ -1,7 +1,7 @@
 {
-    "graphql": {
-           "baseUri":"URI_PLACEHOLDER"
-       },
+        "graphql": {
+               "baseUri":"URI_PLACEHOLDER"
+           },
 	"veritone-api": {
 		"token": "TOKEN_PLACEHOLDER",
 		"baseUri": "URI_PLACEHOLDER",
