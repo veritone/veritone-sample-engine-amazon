@@ -79,45 +79,6 @@ module.exports = function createFunction(config) {
         });
     }
 
-    function getCollectionId(libraryId, libraryEngineModelId, callback) {
-        const q = `query {
-    library(id: "${libraryId}") {
-      id
-         version
-         engineModels(id: "${libraryEngineModelId}") {
-           count
-           records {
-             id
-             name
-             jsondata
-             dataUrl
-             trainJobId
-             trainStatus
-             containerId
-           }
-         }
-       }
-     }`;
-
-
-        query(q, {}, function(err, data) {
-            if (err) callback(err, null);
-            let json = JSON.parse(data.text);
-            if (json && json.data && json.data.library) {
-                if (json.data.library.engineModels.count) {
-                    let jsondata = json.data.library.engineModels.records[0].jsondata;
-                    console.log(JSON.stringify(jsondata));
-                    // TODO get the collection ID
-                } else {
-                    throw Error('library engine model ' + libraryEngineModelId + ' not found');
-                }
-            } else {
-                throw Error('library ' + libraryId + ' not found');
-            }
-            callback(err, data.text);
-        });
-    }
-
     function createAsset(tdoId, contentType, assetType, fileName, source, data, callback) {
         let size = data.length;
         let query = `mutation {
@@ -174,7 +135,6 @@ module.exports = function createFunction(config) {
     return {
         createAsset,
         query,
-        getCollectionId,
         getData
     }
 }

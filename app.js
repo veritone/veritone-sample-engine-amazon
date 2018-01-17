@@ -4,7 +4,7 @@ const utils = require('./utils');
 const logger = require('./logger');
 
 var util = require('util'),
-    VeritoneApi = require('veritone-api'),
+    VeritoneApi = require('./api'),
     RecognitionHelper = require('./recognition-helper'),
     fs = require('fs');
 

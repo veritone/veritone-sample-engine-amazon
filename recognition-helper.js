@@ -5,7 +5,6 @@ const fs = require('fs');
 var async = require('async'),
     RecordingDecomposer = require('./recording-decomposer.js'),
     imageUtil = require('./imageUtil.js'),
-    path = require('path'),
     AmazonRekognitionClient = require('./amazon-rekognition-client');
 
 function RecognitionHelper(config) {
@@ -40,7 +39,6 @@ RecognitionHelper.prototype.detectFaces = function detectFaces(amazonRekognition
   };
 
   var start = Date.now();
-  var detectedFaces;
   amazonRekognitionClient._client.detectFaces(params, function detectFacesCallback(err, result) {
     if (payload.perfTrace) {
       console.log('PERF detectFaces '+(Date.now() - start));
@@ -89,7 +87,7 @@ RecognitionHelper.prototype.processImages = function processImages(frames, amazo
 
   async.forEachLimit(frames, self.maxParallelImages, function eachImage(frame, nextCallback) {
     if (payload.debug) console.log('starting frame '+frame.start);
-    // for each image, first we detect faces.
+    // for each image, first detect faces.
     // first load the image (once)
     // image metadata will be loaded in image, and a buffer loaded in imageBuffer.
     var start = Date.now();
