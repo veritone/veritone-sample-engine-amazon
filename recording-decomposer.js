@@ -1,12 +1,11 @@
 const fs = require('fs');
  exec = require('child_process').exec,
  path = require('path'),
- ffmpeg = require('ffmpeg'),
+ ffmpeg = require('./ffmpeg-helper.js')(),
  download = require('download-file'),
  mimetypes = require('mime-types'),
- moment = require('moment'),
- ffmpegCmd = path.join(__dirname, 'node_modules', 'ffmpeg', 'ffmpeg.' + process.platform),
- ffprobeCmd = path.join(__dirname, 'node_modules', 'ffmpeg', 'ffprobe.' + process.platform),
+ ffmpegCmd = path.join(__dirname, 'ffmpeg.' + process.platform),
+ ffprobeCmd = path.join(__dirname, 'ffprobe.' + process.platform),
  VOLUME_ADJUSTMENT_TOLERANCE = 0.75,
  EXEC_BUFFER_SIZE = 20 * 1024 * 1024;
 
@@ -24,53 +23,51 @@ function cleanupData(dataPath) {
 }
 
 RecordingDecomposer.prototype.processAVideo = function processAVideo(videoPath, framesPerSecond, payload, callback) {
-        var self = this;
-        var options = {
-            inputFile: videoPath,
-            outputFilename: 'frame',
-            frameRate: framesPerSecond,
-            outputFolder: './images'
-        };
-        if (payload.hasOwnProperty('jpegQuality')) {
-          options.jpegQuality = payload.jpegQuality;
-        }
-        // TODO fix payload variable reference.
-        // currently it's used only for debug setting so no big deal.
-        //var payload = {};
-        var start = Date.now();
-        this.extractFramesToJPG(options, function done(err, files) {
-          if (payload.perfTrace) {
-            console.log('PERF extractFramesToJPG '+(Date.now() - start));
-          }
-            if (err) {
-                return callback(err);
-            }
-            if (!payload.keep) {
-                cleanupData(options.inputFile);
-            }
-            // catch possible error and pass the error as callback
-            try {
-                var result = self.buildResult(files, framesPerSecond);
-                callback(null, result);
-            } catch (e) {
-                callback(e);
-            }
-        });
+    var self = this;
+    var options = {
+        inputFile: videoPath,
+        outputFilename: 'frame',
+        frameRate: framesPerSecond,
+        outputFolder: './images'
+    };
+    if (payload.hasOwnProperty('jpegQuality')) {
+      options.jpegQuality = payload.jpegQuality;
     }
-    /**
-     * Process Veritone media
-     *
-     * Download video from CMS recordingId then extract frames from video to image files
-     *
-     * @param recordingId
-     * 		Veritone CMS recording ID
-     *
-     * @param framesPerSecond
-     *		FPS rate to be used to extract frames using ffmpeg
-     *
-     * @param callback
-     *		Callback with errors and array of exctracted images with timing info (start, end)
-     */
+    var start = Date.now();
+    this.extractFramesToJPG(options, function done(err, files) {
+      if (payload.perfTrace) {
+        console.log('PERF extractFramesToJPG '+(Date.now() - start));
+      }
+        if (err) {
+            return callback(err);
+        }
+        if (!payload.keep) {
+            cleanupData(options.inputFile);
+        }
+        // catch possible error and pass the error as callback
+        try {
+            var result = self.buildResult(files, framesPerSecond);
+            callback(null, result);
+        } catch (e) {
+            callback(e);
+        }
+    });
+}
+
+/**
+ * Process Veritone media
+ *
+ * Download video from CMS recordingId then extract frames from video to image files
+ *
+ * @param recordingId
+ * 		Veritone CMS recording ID
+ *
+ * @param framesPerSecond
+ *		FPS rate to be used to extract frames using ffmpeg
+ *
+ * @param callback
+ *		Callback with errors and array of exctracted images with timing info (start, end)
+ */
 RecordingDecomposer.prototype.process = function process(tdoData, framesPerSecond, payload, callback) {
     var self = this;
     if (this.hasImageAsset(tdoData)) {
@@ -243,7 +240,7 @@ RecordingDecomposer.prototype.extractFramesToJPG = function extractFramesToJPG(o
     throw new Error('options.jpegQuality must be a number from 1-10');
   }
   var jpegQuality = options.jpegQuality || 1;
-	ffmpeg.getMediaDetails(options.inputFile, function done(error, details) {
+	ffmpeg.getMediaDetails(options.inputFile, function done(error, details){
 		if (error) {
 			return callback(error);
 		}

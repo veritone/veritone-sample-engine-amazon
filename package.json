@@ -22,7 +22,6 @@
     "command-line-args": "^4.0.7",
     "command-line-usage": "^4.0.1",
     "download-file": "^0.1.5",
-    "ffmpeg": "^0.0.4",
     "graphql-tag": "^2.4.2",
     "jimp": "^0.2.28",
     "mime-types": "^2.1.17",
@@ -33,7 +32,8 @@
     "valid-url": "^1.0.9",
     "veritone-api": "git+https://github.com/veritone/veritone-api.git#develop",
     "winston": "^2.3.1",
-    "yargs": "^9.0.1"
+    "yargs": "^9.0.1",
+    "moment": "^2.10.6"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
