@@ -32,40 +32,41 @@ module.exports = function createFunction(config) {
      }
      */
     function getData(params, callback) {
-        const q = `query {
-    temporalDataObject(id: "${params.tdoId}") {
-      id
-      startDateTime
-      stopDateTime
-      mediaAssets: assets(assetType: ["media"]) {
-        records {
-          ...assetFields
-        }
-      }
-      imageAssets: assets(assetType: ["image"]) {
-        records {
-          ...assetFields
-        }
-      }
-    }
-      task(id: "${params.taskId}") {
-          id
-          status
-          buildId
-          engineId
-    }
-  }
-
-  fragment assetFields on Asset {
-    id
-    name
-    contentType
-    jsondata
-    assetType
-    uri
-    signedUri
-    createdDateTime
-  }`;
+        const q =
+            `query {
+                temporalDataObject(id: "${params.tdoId}") {
+                    id
+                    startDateTime
+                    stopDateTime
+                    mediaAssets: assets(assetType: ["media"]) {
+                        records {
+                            ...assetFields
+                        }
+                    }
+                    imageAssets: assets(assetType: ["image"]) {
+                        records {
+                            ...assetFields
+                        }
+                    }
+                }
+                task(id: "${params.taskId}") {
+                    id
+                    status
+                    buildId
+                    engineId
+                }
+            }
+            fragment assetFields on Asset {
+                id
+                name
+                contentType
+                jsondata
+                assetType
+                uri
+                signedUri
+                createdDateTime
+            }
+        `;
         console.log(q);
         query(q, {}, function(err, data) {
             if (err) {
@@ -81,22 +82,23 @@ module.exports = function createFunction(config) {
 
     function createAsset(tdoId, contentType, assetType, fileName, source, data, callback) {
         let size = data.length;
-        let query = `mutation {
-  createAsset(input: {
-    containerId: "${tdoId}"
-    contentType: "${contentType}"
-    jsondata: {
-      size: "${size}"
-      source: "${source}"
-      fileName: "${fileName}"
-    }
-    assetType: "${assetType}"
-  }) {
-    id
-    uri
-  }
-}
-  `;
+        let query =
+            `mutation {
+                createAsset(input: {
+                    containerId: "${tdoId}"
+                    contentType: "${contentType}"
+                    jsondata: {
+                        size: "${size}"
+                        source: "${source}"
+                        fileName: "${fileName}"
+                    }
+                    assetType: "${assetType}"
+                }) {
+                    id
+                    uri
+                }
+            }
+        `;
 
         var headers = {
             Authorization: 'Bearer ' + config['veritone-api'].token,
@@ -128,13 +130,35 @@ module.exports = function createFunction(config) {
         }
     }
 
-    function updateTask(taskUpdate) {
+    function updateTask(jobId, taskId, status, output, callback) {
+        const q =
+            `mutation {
+                updateTask(input: {
+                    jobId: "${jobId}"
+                    id: "${taskId}"
+                    status: ${status}
+                    output: ${output}
+                }) {
+                    id
+                    status
+                }
+            }
+        `;
+        query(q, {}, function(err, data) {
+            if (err) {
+                callback(err, null);
+                console.log('error:  ' + err);
+                return;
+            }
 
+            let json = JSON.parse(data.text);
+            callback(null, json.data);
+        });
     }
 
     return {
         createAsset,
-        query,
-        getData
+        getData,
+        updateTask
     }
 }

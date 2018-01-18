@@ -1,9 +1,9 @@
 {
-  "jobId": "JOBID_PLACEHOLDER",
-  "token": "TOKEN_PLACEHOLDER",
-  "taskId": "TASKID_PLACEHOLDER",
-  "recordingId": "12345678",
-  "taskPayload": {},
-  "applicationId": "APPID_PLACEHOLDER",
-  "veritoneApiBaseUrl": "https://api.veritone.com"
+    "jobId": "JOBID_PLACEHOLDER",
+    "token": "TOKEN_PLACEHOLDER",
+    "taskId": "TASKID_PLACEHOLDER",
+    "recordingId": "12345678",
+    "taskPayload": {},
+    "applicationId": "APPID_PLACEHOLDER",
+    "veritoneApiBaseUrl": "https://api.veritone.com"
 }

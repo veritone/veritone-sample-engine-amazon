@@ -4,7 +4,6 @@ const utils = require('./utils');
 const logger = require('./logger');
 
 var util = require('util'),
-    VeritoneApi = require('./api'),
     RecognitionHelper = require('./recognition-helper'),
     fs = require('fs');
 
@@ -80,7 +79,6 @@ if (typeof payload.veritoneApiBaseUrl !== 'string') {
     throw new Error('Missing from payload veritoneApiBaseUrl!');
 }
 
-//replace with
 config["veritone-api"]["token"] = payload.token;
 config["veritone-api"]["baseUri"] = payload.veritoneApiBaseUrl;
 config["graphql"]["baseUri"] = payload.veritoneApiBaseUrl+"/v3/graphql";
@@ -110,12 +108,12 @@ if (!config.maxParallelImages) config.maxParallelImages = 50;
 
 const assetApi = require('./asset.js')(config);
 
-var veritoneClient = new VeritoneApi(config['veritone-api']),
-    recognitionHelper = new RecognitionHelper(config);
+var recognitionHelper = new RecognitionHelper(config);
 
 function startTask(callback) {
-    const task = { taskStatus: 'running' };
-    veritoneClient.updateTask(payload.jobId, payload.taskId, task, function startTaskCompleteCallback(err) {
+    const taskStatus = 'running';
+    var output = {};
+    assetApi.updateTask(payload.jobId, payload.taskId, taskStatus, output, function startTaskCompleteCallback(err) {
         if (err) {
             console.log('jobId=' + payload.jobId + ', taskId=' + payload.taskId);
             console.log('update task failed: ' + util.inspect(err));
@@ -128,8 +126,8 @@ function startTask(callback) {
 }
 
 function completeTask(caller, taskOutput) {
-    const task = { taskStatus: 'complete', taskOutput: taskOutput };
-    veritoneClient.updateTask(payload.jobId, payload.taskId, task, function updateTaskCompleteCallback(err) {
+    const taskStatus = 'complete';
+    assetApi.updateTask(payload.jobId, payload.taskId, taskStatus, taskOutput, function updateTaskCompleteCallback(err) {
         if (err) {
             return failTask('updateTaskToComplete.error ' + util.inspect(err));
         }
@@ -138,8 +136,8 @@ function completeTask(caller, taskOutput) {
 }
 
 function failTask(errMessage) {
-    const task = { taskStatus: 'failed', taskOutput: errMessage };
-    veritoneClient.updateTask(payload.jobId, payload.taskId, task, function failTaskCallback(err) {
+    const taskStatus = 'failed';
+    assetApi.updateTask(payload.jobId, payload.taskId, taskStatus, errMessage, function failTaskCallback(err) {
         if (err) {
             console.error('updateTaskToFailed.error:', util.inspect(err));
         } else {
