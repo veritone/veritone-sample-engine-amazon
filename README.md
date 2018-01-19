@@ -27,7 +27,7 @@ $ docker login docker.veritone.com
 $ docker build -t az-rekognition-face-detection .
 ```
 
-### Deploying engine via Veritone Developer
+### Deploying the engine via Veritone Developer
 
 Once built and tested locally (either as a Docker container or running `node app.js` as shown above),
 tag the engine and upload the build to the Veritone Docker registry:
