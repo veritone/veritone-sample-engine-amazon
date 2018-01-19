@@ -1,7 +1,7 @@
 const util = require('util');
 const validurl = require('valid-url');
 const path = require('path');
-const utils = require('./utils');
+const utils = require('./lib/utils');
 global.fetch = require('node-fetch');;
 
 module.exports = function createFunction(config) {
@@ -21,16 +21,6 @@ module.exports = function createFunction(config) {
         }
     }
 
-    /**
-     * Recognition data:
-     {
-      libraryId: ...
-      libraryEngineModelId: ...,
-      recordingId: ...,
-      jobId: ...,
-      taskId: ...,
-     }
-     */
     function getData(params, callback) {
         const q =
             `query {

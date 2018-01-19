@@ -3,9 +3,9 @@
 const fs = require('fs');
 
 var async = require('async'),
-    RecordingDecomposer = require('./recording-decomposer.js'),
-    imageUtil = require('./imageUtil.js'),
-    AmazonRekognitionClient = require('./amazon-rekognition-client');
+    RecordingDecomposer = require('./lib/recording-decomposer.js'),
+    imageUtil = require('./lib/imageUtil.js'),
+    AmazonRekognitionClient = require('./lib/amazon-rekognition-client');
 
 function RecognitionHelper(config) {
     if (typeof config !== 'object') {

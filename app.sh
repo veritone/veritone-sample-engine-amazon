@@ -1,7 +1,7 @@
 #!/bin/sh
 
-chmod +x ./ffprobe.linux
-chmod +x ./ffmpeg.linux
+chmod +x ./lib/ffprobe.linux
+chmod +x ./lib/ffmpeg.linux
 # TODO
 #node ./babelsrc/app.js
 node app.js

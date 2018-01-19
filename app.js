@@ -1,7 +1,7 @@
 'use strict';
 
-const utils = require('./utils');
-const logger = require('./logger');
+const utils = require('./lib/utils');
+const logger = require('./lib/logger');
 
 var util = require('util'),
     RecognitionHelper = require('./recognition-helper'),
