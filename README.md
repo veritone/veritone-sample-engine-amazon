@@ -1,6 +1,6 @@
 ## Veritone sample engine using Amazon Rekognition
 
-This project demonstrates the process of creating a Veritone face detection engine using the Amazon Rekognition API. For more information about the Amazon Rekognition, visit [here](https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html). 
+This project demonstrates the process of creating a Veritone face detection engine using the Amazon Rekognition API. For more information about Amazon Rekognition, visit [here](https://docs.aws.amazon.com/rekognition/latest/dg/what-is.html). 
 
 ### Building and running the engine locally 
 
